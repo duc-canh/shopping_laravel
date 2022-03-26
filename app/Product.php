@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Category;
 use App\ProductImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use softDeletes;
     protected $table = 'products';
     protected $fillable =[
         'name',
@@ -22,5 +25,8 @@ class Product extends Model
     }
     public function tags(){
         return $this->belongsToMany(Tag::class,'product_tags','product_id','tag_id')->withTimestamps();
+    }
+    public function categories(){
+        return $this->belongsTo(Category::class,'category_id');
     }
 }
