@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SliderAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,17 @@ Route::prefix('admin')->group(function(){
         Route::post('update/{id}',[ProductController::class,'update'])->name('admin.product.update');
 
         Route::get('delete/{id}',[ProductController::class,'delete'])->name('admin.product.delete');
+    });
+
+    Route::prefix('slider')->group(function(){
+        Route::get('/',[SliderAdminController::class,'index'])->name('admin.slider.index');
+        
+        Route::get('add',[SliderAdminController::class,'create'])->name('admin.slider.add');
+        Route::post('store',[SliderAdminController::class,'store'])->name('admin.slider.store');
+
+        Route::get('edit/{id}',[SliderAdminController::class,'edit'])->name('admin.slider.edit');
+        Route::post('update/{id}',[SliderAdminController::class,'update'])->name('admin.slider.update');
+
+        Route::get('delete/{id}',[SliderAdminController::class,'delete'])->name('admin.slider.delete');
     });
 });

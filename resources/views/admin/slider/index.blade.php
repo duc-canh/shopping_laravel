@@ -3,13 +3,10 @@
 @section('title')
 Trang chủ
 @endsection
-@section('js')
-<script src="/vendors/sweetAlert/sweetalert2@11.js"></script>
-<script src="/adminpb/product/index/list.js"></script>
-@endsection
+
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header',['name'=>'Product','key'=>'List'])
+    @include('partials.content-header',['name'=>'Slider','key'=>'List'])
     @if(session('success'))
     <div class="alert alert-success col-md-3">
         {{ session('success') }}
@@ -19,34 +16,31 @@ Trang chủ
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('admin.product.add')}}" class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{ route('admin.slider.add')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Tên Sản Phẩm</th>
-                                <th scope="col">Giá</th>
+                                <th scope="col">Tên Slider</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Hình ảnh</th>
-                                <th scope="col">Danh mục</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $product)
+                            @foreach($sliders as $slider)
                             <tr>
-                                <th scope="row">{{ $product->id }}</th>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td><img style="object-fit:cover;" width="50px" height="20px"
-                                        src="{{ $product->feature_image_path }}" alt=""></td>
-                                <td>{{ optional($product->categories)->name }}</td>
+                                <th scope="row">{{ $slider->id }}</th>
+                                <td>{{ $slider->name }}</td>
+                                <td>{{ $slider->description }}</td>
+                                <td>{{ $slider->image_path }}</td>
                                 <td>
-                                    <a href="{{ route('admin.product.edit',['id'=>$product->id])}}"
+                                    <a href="{{ route('admin.slider.edit',['id'=>$slider->id])}}"
                                         class="btn btn-success">Edit</a>
-                                    <a href="" data-url="{{ route('admin.product.delete',['id'=>$product->id])}}"
-                                        class="btn btn-danger action_delete">Delete</a>
+                                    <a href="{{ route('admin.slider.delete',['id'=>$slider->id])}}"
+                                        class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -54,17 +48,13 @@ Trang chủ
                     </table>
                 </div>
                 <div class="col-md-12">
-                    {!! $products->links() !!}
+                    {!! $sliders->links() !!}
                 </div>
             </div>
-            <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
     <div class="p-3">

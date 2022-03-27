@@ -48,6 +48,12 @@
                         <p>Sản Phẩm</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.slider.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Slider</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

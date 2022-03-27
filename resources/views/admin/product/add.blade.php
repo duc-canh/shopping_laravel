@@ -25,7 +25,10 @@ Trang chủ
                         @csrf
                         <div class="form-group">
                             <label>Tên Sản Phẩm</label>
-                            <input name="name" class="form-control" placeholder="Nhập tên Sản phẩm">
+                            <input name="name" class="form-control" placeholder="Nhập tên Sản phẩm" value="{{ old('name')}}">
+                            <!-- @error('name')
+                                <div class="alert alert-danger">{{ $message}}</div>
+                            @enderror -->
                         </div>
                         <div class="form-group">
                             <label>Giá sản phẩm</label>

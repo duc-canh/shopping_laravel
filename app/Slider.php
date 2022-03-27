@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Slider extends Model
+{
+    
+    protected $table = 'sliders';
+    protected $fillable =[
+        'name',
+        'description',
+        'image_path',
+        'image_name',
+    ];
+}
