@@ -42,9 +42,44 @@ class SliderAdminController extends Controller
        
     }
     public function edit($id){
-        
+        $slider = Slider::find($id);
+        return view('admin.slider.edit',compact('slider'));
+    }
+    public function update($id,Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'description'=>'required',
+        ]);
+        try{
+            $dataInsert = [
+                'name'=>$request->name,
+                'description'=>$request->description,
+            ];
+            $dataImageSlider = $this->storageTraitUpload($request,'image_path','slider');
+            if(!empty($dataImageSlider)){
+            $dataImageSlider = $this->storageTraitUpload($request,'image_path','slider');
+                $dataInsert['image_path'] = $dataImageSlider['file_path'];
+                $dataInsert['image_name'] = $dataImageSlider['file_name'];
+            }
+            Slider::find($id)->update($dataInsert);
+            return redirect()->route('admin.slider.index')->with('success','update successfully');
+        }catch(Exception $ex){
+            Log::error('Message : '.$ex->getMessage().'; Line : '.$ex->getLine());
+        }
     }
     public function delete($id){
-
+        try{
+            Slider::find($id)->delete();
+            return response()->json([
+                'code'=>200,
+                'message'=>'success',
+            ],200);
+        }catch(Exception $exception){
+            Log::error('Message : '.$exception->getMessage().'; Line : '.$exception->getLine());
+            return response()->json([
+                'code'=>500,
+                'message'=>'fail',
+            ],500);
+        };
     }
 }

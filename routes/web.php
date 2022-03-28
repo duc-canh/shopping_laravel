@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SliderAdminController;
+use App\Http\Controllers\AdminSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +72,17 @@ Route::prefix('admin')->group(function(){
         Route::post('update/{id}',[SliderAdminController::class,'update'])->name('admin.slider.update');
 
         Route::get('delete/{id}',[SliderAdminController::class,'delete'])->name('admin.slider.delete');
+    });
+
+    Route::prefix('setting')->group(function(){
+        Route::get('/',[AdminSettingController::class,'index'])->name('admin.setting.index');
+        
+        Route::get('add',[AdminSettingController::class,'create'])->name('admin.setting.add');
+        Route::post('store',[AdminSettingController::class,'store'])->name('admin.setting.store');
+
+        Route::get('edit/{id}',[AdminSettingController::class,'edit'])->name('admin.setting.edit');
+        Route::post('update/{id}',[AdminSettingController::class,'update'])->name('admin.setting.update');
+
+        Route::get('delete/{id}',[AdminSettingController::class,'delete'])->name('admin.setting.delete');
     });
 });

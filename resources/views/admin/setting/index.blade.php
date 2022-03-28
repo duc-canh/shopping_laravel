@@ -3,13 +3,12 @@
 @section('title')
 Trang chủ
 @endsection
-@section('js')
-<script src="/vendors/sweetAlert/sweetalert2@11.js"></script>
-<script src="/adminpb/product/index/list.js"></script>
+@section('css')
+<link rel="stylesheet" href="/adminpb/setting/index.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header',['name'=>'Slider','key'=>'List'])
+    @include('partials.content-header',['name'=>'Setting','key'=>'List'])
     @if(session('success'))
     <div class="alert alert-success col-md-3">
         {{ session('success') }}
@@ -19,31 +18,38 @@ Trang chủ
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('admin.slider.add')}}" class="btn btn-success float-right m-2">Add</a>
+                    <div class="btn-group float-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            Add setting
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('admin.setting.add') . '?type=text'}}">Text</a></li>
+                            <li><a href="{{ route('admin.setting.add').'?type=textarea'}}">Textarea</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Tên Slider</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Hình ảnh</th>
+                                <th scope="col">Config key</th>
+                                <th scope="col">Config value</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($sliders as $slider)
+                            @foreach($settings as $setting)
                             <tr>
-                                <th scope="row">{{ $slider->id }}</th>
-                                <td>{{ $slider->name }}</td>
-                                <td>{{ $slider->description }}</td>
-                                <td><img width="50px" height="20px" style="object-fit:cover" src="{{ $slider->image_path }}" alt=""></td>
+                                <th scope="row">{{ $setting->id }}</th>
+                                <td>{{ $setting->config_key }}</td>
+                                <td>{{ $setting->config_value }}</td>
                                 <td>
-                                    <a href="{{ route('admin.slider.edit',['id'=>$slider->id])}}"
+                                    <a href="{{ route('admin.setting.edit',['id'=>$setting->id])}}"
                                         class="btn btn-success">Edit</a>
-                                    <a href="" data-url="{{ route('admin.slider.delete',['id'=>$slider->id])}}"
-                                        class="btn btn-danger action_delete">Delete</a>
+                                    <a href="{{ route('admin.setting.delete',['id'=>$setting->id])}}"
+                                        class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -51,7 +57,7 @@ Trang chủ
                     </table>
                 </div>
                 <div class="col-md-12">
-                    {!! $sliders->links() !!}
+                    {!! $settings->links() !!}
                 </div>
             </div>
         </div><!-- /.container-fluid -->
