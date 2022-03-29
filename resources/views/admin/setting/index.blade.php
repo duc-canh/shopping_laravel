@@ -36,6 +36,7 @@ Trang chủ
                                 <th scope="col">STT</th>
                                 <th scope="col">Config key</th>
                                 <th scope="col">Config value</th>
+                                <th scope="col">Type</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -45,8 +46,9 @@ Trang chủ
                                 <th scope="row">{{ $setting->id }}</th>
                                 <td>{{ $setting->config_key }}</td>
                                 <td>{{ $setting->config_value }}</td>
+                                <td>{{ $setting->type }}</td>
                                 <td>
-                                    <a href="{{ route('admin.setting.edit',['id'=>$setting->id])}}"
+                                    <a href="{{ route('admin.setting.edit',['id'=>$setting->id]).'?type='. $setting->type}}"
                                         class="btn btn-success">Edit</a>
                                     <a href="{{ route('admin.setting.delete',['id'=>$setting->id])}}"
                                         class="btn btn-danger">Delete</a>
