@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\SliderAdminController;
 use App\Http\Controllers\AdminSettingController;
 
@@ -21,6 +22,8 @@ use App\Http\Controllers\AdminSettingController;
 
 Route::get('admin', [AdminController::class,'loginAdmin']);
 Route::post('admin', [AdminController::class,'postLoginAdmin'])->name('admin.postLogin');
+
+Route::get('logout',[AdminController::class,'logout']);
 
 Route::get('home', function () {
     return view('home');
@@ -84,5 +87,17 @@ Route::prefix('admin')->group(function(){
         Route::post('update/{id}',[AdminSettingController::class,'update'])->name('admin.setting.update');
 
         Route::get('delete/{id}',[AdminSettingController::class,'delete'])->name('admin.setting.delete');
+    });
+
+    Route::prefix('users')->group(function(){
+        Route::get('/',[AdminUserController::class,'index'])->name('admin.users.index');
+        
+        Route::get('add',[AdminUserController::class,'create'])->name('admin.users.add');
+        Route::post('store',[AdminUserController::class,'store'])->name('admin.users.store');
+
+        Route::get('edit/{id}',[AdminUserController::class,'edit'])->name('admin.users.edit');
+        Route::post('update/{id}',[AdminUserController::class,'update'])->name('admin.users.update');
+
+        Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.users.delete');
     });
 });

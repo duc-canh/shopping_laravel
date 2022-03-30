@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Slider;
 use Illuminate\Http\Request;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log;
 
 class SliderAdminController extends Controller
 {
     use StorageImageTrait;
+    use DeleteModelTrait;
+    private $sli = Slider::class;
     public function index(){
         $sliders = Slider::latest()->paginate(5);
         return view('admin.slider.index',compact('sliders'));
@@ -39,7 +42,6 @@ class SliderAdminController extends Controller
         }catch(Exception $ex){
             Log::error('Message : '.$ex->getMessage().'; Line : '.$ex->getLine());
         }
-       
     }
     public function edit($id){
         $slider = Slider::find($id);
@@ -68,18 +70,6 @@ class SliderAdminController extends Controller
         }
     }
     public function delete($id){
-        try{
-            Slider::find($id)->delete();
-            return response()->json([
-                'code'=>200,
-                'message'=>'success',
-            ],200);
-        }catch(Exception $exception){
-            Log::error('Message : '.$exception->getMessage().'; Line : '.$exception->getLine());
-            return response()->json([
-                'code'=>500,
-                'message'=>'fail',
-            ],500);
-        };
+        return $this->deleteModelTrait($id,$this->sli);
     }
 }

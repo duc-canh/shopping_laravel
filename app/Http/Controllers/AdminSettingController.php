@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use App\Traits\DeleteModelTrait;
+use Illuminate\Support\Facades\Log;
 
 class AdminSettingController extends Controller
 {
+    use DeleteModelTrait;
+    private $sett = Setting::class;
     public function index(){
         $settings = Setting::latest()->paginate(10);
         return view('admin.setting.index',\compact('settings'));
@@ -42,5 +46,8 @@ class AdminSettingController extends Controller
             'type'=>$request->type,
         ]);
         return redirect()->route('admin.setting.index')->with('success','update successfully');
+    }
+    public function delete($id){
+        return $this->deleteModelTrait($id,$this->sett);
     }
 }

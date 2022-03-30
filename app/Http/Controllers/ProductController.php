@@ -11,6 +11,7 @@ use App\ProductImage;
 use Illuminate\Support\Str;
 use App\Components\Recusive;
 use Illuminate\Http\Request;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     use StorageImageTrait;
+    use DeleteModelTrait;
+    private $pro = Product::class;
     public function index(){
         $products = Product::latest()->paginate(10);
         return view('admin.product.index',compact('products'));
@@ -143,18 +146,6 @@ class ProductController extends Controller
         };
     }
     public function delete($id){
-        try{
-            Product::find($id)->delete();
-            return response()->json([
-                'code'=>200,
-                'message'=>'success',
-            ],200);
-        }catch(Exception $exception){
-            Log::error('Message : '.$exception->getMessage().'; Line : '.$exception->getLine());
-            return response()->json([
-                'code'=>500,
-                'message'=>'fail',
-            ],500);
-        };
+        return $this->deleteModelTrait($id,$this->pro);
     }
 }

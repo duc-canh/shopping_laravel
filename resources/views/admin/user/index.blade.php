@@ -3,18 +3,13 @@
 @section('title')
 Trang chủ
 @endsection
-@section('css')
-<link rel="stylesheet" href="/adminpb/setting/index.css">
-@endsection
-@section('js')
 @section('js')
 <script src="/vendors/sweetAlert/sweetalert2@11.js"></script>
 <script src="/adminpb/product/index/list.js"></script>
 @endsection
-@endsection
 @section('content')
 <div class="content-wrapper">
-    @include('partials.content-header',['name'=>'Setting','key'=>'List'])
+    @include('partials.content-header',['name'=>'User','key'=>'List'])
     @if(session('success'))
     <div class="alert alert-success col-md-3">
         {{ session('success') }}
@@ -24,39 +19,28 @@ Trang chủ
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="btn-group float-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            Add setting
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('admin.setting.add') . '?type=text'}}">Text</a></li>
-                            <li><a href="{{ route('admin.setting.add').'?type=textarea'}}">Textarea</a></li>
-                        </ul>
-                    </div>
+                    <a href="{{ route('admin.slider.add')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Config key</th>
-                                <th scope="col">Config value</th>
-                                <th scope="col">Type</th>
+                                <th scope="col">Tên </th>
+                                <th scope="col">Chức năng</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($settings as $setting)
+                            @foreach($users as $user)
                             <tr>
-                                <th scope="row">{{ $setting->id }}</th>
-                                <td>{{ $setting->config_key }}</td>
-                                <td>{{ $setting->config_value }}</td>
-                                <td>{{ $setting->type }}</td>
+                                <th scope="row">{{ $user->id }}</th>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->display_name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.setting.edit',['id'=>$setting->id]).'?type='. $setting->type}}"
+                                    <a href="{{ route('admin.users.edit',['id'=>$user->id])}}"
                                         class="btn btn-success">Edit</a>
-                                    <a href="" data-url="{{ route('admin.setting.delete',['id'=>$setting->id])}}"
+                                    <a href="" data-url="{{ route('admin.users.delete',['id'=>$user->id])}}"
                                         class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>
@@ -65,7 +49,7 @@ Trang chủ
                     </table>
                 </div>
                 <div class="col-md-12">
-                    {!! $settings->links() !!}
+                    {!! $users->links() !!}
                 </div>
             </div>
         </div><!-- /.container-fluid -->

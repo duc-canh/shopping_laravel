@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -19,5 +20,8 @@ class AdminController extends Controller
         }else{
             echo 'abc';
         }
+    }
+    public function logout(){
+        Auth::logout();
     }
 }
