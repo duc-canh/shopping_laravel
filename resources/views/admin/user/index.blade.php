@@ -19,7 +19,7 @@ Trang chủ
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('admin.slider.add')}}" class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{ route('admin.user.add')}}" class="btn btn-success float-right m-2">Add</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -27,7 +27,7 @@ Trang chủ
                             <tr>
                                 <th scope="col">STT</th>
                                 <th scope="col">Tên </th>
-                                <th scope="col">Chức năng</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -36,11 +36,11 @@ Trang chủ
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->display_name }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin.users.edit',['id'=>$user->id])}}"
+                                    <a href="{{ route('admin.user.edit',['id'=>$user->id])}}"
                                         class="btn btn-success">Edit</a>
-                                    <a href="" data-url="{{ route('admin.users.delete',['id'=>$user->id])}}"
+                                    <a href="" data-url="{{ route('admin.user.delete',['id'=>$user->id])}}"
                                         class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>

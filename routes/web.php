@@ -90,14 +90,14 @@ Route::prefix('admin')->group(function(){
     });
 
     Route::prefix('users')->group(function(){
-        Route::get('/',[AdminUserController::class,'index'])->name('admin.users.index');
+        Route::get('/',[AdminUserController::class,'index'])->name('admin.user.index');
         
-        Route::get('add',[AdminUserController::class,'create'])->name('admin.users.add');
-        Route::post('store',[AdminUserController::class,'store'])->name('admin.users.store');
+        Route::get('add',[AdminUserController::class,'create'])->name('admin.user.add');
+        Route::post('store',[AdminUserController::class,'store'])->name('admin.user.store');
 
-        Route::get('edit/{id}',[AdminUserController::class,'edit'])->name('admin.users.edit');
-        Route::post('update/{id}',[AdminUserController::class,'update'])->name('admin.users.update');
+        Route::get('edit/{id}',[AdminUserController::class,'edit'])->name('admin.user.edit');
+        Route::post('update/{id}',[AdminUserController::class,'update'])->name('admin.user.update');
 
-        Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.users.delete');
+        Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.user.delete');
     });
 });
