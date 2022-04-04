@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\SliderAdminController;
 use App\Http\Controllers\AdminSettingController;
@@ -99,5 +100,15 @@ Route::prefix('admin')->group(function(){
         Route::post('update/{id}',[AdminUserController::class,'update'])->name('admin.user.update');
 
         Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.user.delete');
+    });
+    Route::prefix('role')->group(function(){
+        Route::get('/',[AdminRoleController::class,'index'])->name('admin.role.index');
+        Route::get('add',[AdminRoleController::class,'create'])->name('admin.role.add');
+        Route::post('store',[AdminRoleController::class,'store'])->name('admin.role.store');
+
+        Route::get('edit/{id}',[AdminRoleController::class,'edit'])->name('admin.role.edit');
+        Route::post('update/{id}',[AdminRoleController::class,'update'])->name('admin.role.update');
+
+        Route::get('delete/{id}',[AdminRoleController::class,'delete'])->name('admin.role.delete');
     });
 });

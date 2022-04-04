@@ -66,6 +66,12 @@
                         <p>Danh sách nhân viên </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.role.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Danh sách vai trò(Roles)</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
