@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
@@ -31,9 +32,13 @@ Route::get('home', function () {
 });
 Route::prefix('admin')->group(function(){
     Route::prefix('category')->group(function(){
-        Route::get('/',[CategoryController::class,'index'])->name('admin.category.index');
+        Route::get('/',[
+            'as'=>'admin.category.index',
+            'uses'=>'CategoryController@index',
+            'middleware'=>'can:category_list',
+        ]);
         
-        Route::get('add',[CategoryController::class,'create'])->name('admin.category.add');
+        Route::get('add',[CategoryController::class,'create'])->name('admin.category.add')->middleware('can:add-category');
         Route::post('store',[CategoryController::class,'store'])->name('admin.category.store');
 
         Route::get('edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
@@ -43,7 +48,7 @@ Route::prefix('admin')->group(function(){
     });
 
     Route::prefix('menu')->group(function(){
-        Route::get('/',[MenuController::class,'index'])->name('admin.menu.index');
+        Route::get('/',[MenuController::class,'index'])->name('admin.menu.index')->middleware('can:menu_list');
         
         Route::get('add',[MenuController::class,'create'])->name('admin.menu.add');
         Route::post('store',[MenuController::class,'store'])->name('admin.menu.store');

@@ -4,9 +4,16 @@ Trang chủ
 @endsection
 @section('js')
 <script>
-    $('.checkbox_wrapper').on('click',function(){
-        $(this).parents('.card').find('.checkbox_childrent').prop('checked',$(this).prop('checked'));
+    $(function(){
+        $('.checkbox_wrapper').on('click',function(){
+            $(this).parents('.card').find('.checkbox_childrent').prop('checked',$(this).prop('checked'));
+        });
+        $('.checkall').on('click',function(){
+            $(this).parents().find('.checkbox_childrent').prop('checked',$(this).prop('checked'));
+            $(this).parents().find('.checkbox_wrapper').prop('checked',$(this).prop('checked'));
+        });
     });
+   
 </script>
 @endsection
 @section('css')
@@ -44,6 +51,10 @@ input[type='checkbox']{
                                 <textarea class="form-control" name="display_name" rows="3"
                                     value="{{ old('display_name')}}"></textarea>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="checkbox" class="checkall">
+                            <label >Check All</label>
                         </div>
                         @foreach($permissionParent as $permissionParentItem)
                         <div class="col-md-12">

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Permission;
 use Illuminate\Http\Request;
+use App\Traits\DeleteModelTrait;
 
 class AdminRoleController extends Controller
 {
+    use DeleteModelTrait;
+    private $rol = Role::class;
     public function index(){
         $roles = Role::paginate();
         return view('admin.role.index',compact('roles'));
@@ -48,5 +51,9 @@ class AdminRoleController extends Controller
         $role = Role::find($id);
         $role->permissions()->sync($request->permission_id);
         return redirect()->route('admin.role.index')->with('success','update successfully');
+    }
+    public function delete($id){
+        return $this->deleteModelTrait($id,$this->rol);
+        
     }
 }

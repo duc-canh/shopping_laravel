@@ -5,9 +5,10 @@ namespace App;
 use App\Role;
 use App\Permission;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
+    use softDeletes;
     protected $table = 'roles';
     protected $fillable =[
         'name',
