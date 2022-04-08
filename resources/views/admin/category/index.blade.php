@@ -16,7 +16,9 @@ Trang chủ
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @can('delete_category')
                     <a href="{{ route('admin.category.add')}}" class="btn btn-success float-right m-2">Add</a>
+                    @endcan
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -33,10 +35,14 @@ Trang chủ
                                 <th scope="row">{{ $category->id }}</th>
                                 <td>{{ $category->name }}</td>
                                 <td>
+                                    @can('update_category')
                                     <a href="{{ route('admin.category.edit',['id'=>$category->id])}}"
                                         class="btn btn-success">Edit</a>
+                                    @endcan
+                                    @can('delete_category')
                                     <a href="{{ route('admin.category.delete',['id'=>$category->id])}}"
                                         class="btn btn-danger">Delete</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

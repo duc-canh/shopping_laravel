@@ -54,6 +54,5 @@ class AdminRoleController extends Controller
     }
     public function delete($id){
         return $this->deleteModelTrait($id,$this->rol);
-        
     }
 }

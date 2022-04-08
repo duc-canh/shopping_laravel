@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
@@ -81,5 +82,8 @@ class AdminUserController extends Controller
     }
     public function delete($id){
         return $this->deleteModelTrait($id,$this->user);
+    }
+    public function myName(){
+       echo 'abc';
     }
 }

@@ -10,7 +10,7 @@
                 <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="{{ route('admin.myName')}}" class="d-block">Alexander Pierce</a>
             </div>
         </div>
         <div class="form-inline">
@@ -70,6 +70,12 @@
                     <a href="{{ route('admin.role.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Danh sách vai trò(Roles)</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.permission.add')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Tạo dữ liệu bảng Permission</p>
                     </a>
                 </li>
             </ul>
