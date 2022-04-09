@@ -35,7 +35,12 @@ class AuthServiceProvider extends ServiceProvider
         // Gate::define('edit-settings', function ($user) {
         //     return $user->isAdmin;
         // });
-        
+         Gate::define('admin_access', function ($user) {
+           if(auth()->check()){
+             return true;
+           }
+            return false;
+        });
         // Gate::define('list_category', function (User $user) {
         //   return $user->checkPermissionAccess(config('permissions.access.list_category'));
         // });

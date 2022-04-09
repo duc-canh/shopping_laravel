@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Category;
+use App\Role;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoryPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class CategoryPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
+     * @param  \App\Role  $role
      * @return mixed
      */
     public function view(User $user)
     {
-        return $user->checkPermissionAccess('list_category');
+        return $user->checkPermissionAccess('list_role');
     }
 
     /**
@@ -41,41 +41,41 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        return $user->checkPermissionAccess('add_category');
+        return $user->checkPermissionAccess('add_role');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
+     * @param  \App\Role  $role
      * @return mixed
      */
     public function update(User $user)
     {
-        return $user->checkPermissionAccess('edit_category');
+        return $user->checkPermissionAccess('edit_role');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
+     * @param  \App\Role  $role
      * @return mixed
      */
     public function delete(User $user)
     {
-        return $user->checkPermissionAccess('delete_category');
+        return $user->checkPermissionAccess('delete_role');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
+     * @param  \App\Role  $role
      * @return mixed
      */
-    public function restore(User $user, Category $category)
+    public function restore(User $user, Role $role)
     {
         //
     }
@@ -84,10 +84,10 @@ class CategoryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
+     * @param  \App\Role  $role
      * @return mixed
      */
-    public function forceDelete(User $user, Category $category)
+    public function forceDelete(User $user, Role $role)
     {
         //
     }

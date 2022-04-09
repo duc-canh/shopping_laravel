@@ -30,10 +30,11 @@ Route::get('logout',[AdminController::class,'logout']);
 
 Route::get('myName',[AdminController::class,'myName'])->name('admin.myName');
 
-Route::get('home', function () {
-    return view('home');
-});
-Route::prefix('admin')->group(function(){
+
+Route::prefix('admin')->middleware('can:admin_access')->group(function(){
+    Route::get('home', function () {
+        return view('home');
+    });
     Route::prefix('category')->group(function(){
         Route::get('/',[
             'as'=>'admin.category.index',
@@ -53,60 +54,60 @@ Route::prefix('admin')->group(function(){
     Route::prefix('menu')->group(function(){
         Route::get('/',[MenuController::class,'index'])->name('admin.menu.index')->middleware('can:list_menu');
         
-        Route::get('add',[MenuController::class,'create'])->name('admin.menu.add');
+        Route::get('add',[MenuController::class,'create'])->name('admin.menu.add')->middleware('can:add_menu');
         Route::post('store',[MenuController::class,'store'])->name('admin.menu.store');
 
-        Route::get('edit/{id}',[MenuController::class,'edit'])->name('admin.menu.edit');
+        Route::get('edit/{id}',[MenuController::class,'edit'])->name('admin.menu.edit')->middleware('can:edit_menu');
         Route::post('update/{id}',[MenuController::class,'update'])->name('admin.menu.update');
 
-        Route::get('delete/{id}',[MenuController::class,'delete'])->name('admin.menu.delete');
+        Route::get('delete/{id}',[MenuController::class,'delete'])->name('admin.menu.delete')->middleware('can:delete_menu');
     });
 
    
     Route::prefix('slider')->group(function(){
-        Route::get('/',[SliderAdminController::class,'index'])->name('admin.slider.index');
+        Route::get('/',[SliderAdminController::class,'index'])->name('admin.slider.index')->middleware('can:list_slider');
         
-        Route::get('add',[SliderAdminController::class,'create'])->name('admin.slider.add');
+        Route::get('add',[SliderAdminController::class,'create'])->name('admin.slider.add')->middleware('can:add_slider');
         Route::post('store',[SliderAdminController::class,'store'])->name('admin.slider.store');
 
-        Route::get('edit/{id}',[SliderAdminController::class,'edit'])->name('admin.slider.edit');
+        Route::get('edit/{id}',[SliderAdminController::class,'edit'])->name('admin.slider.edit')->middleware('can:edit_slider');
         Route::post('update/{id}',[SliderAdminController::class,'update'])->name('admin.slider.update');
 
-        Route::get('delete/{id}',[SliderAdminController::class,'delete'])->name('admin.slider.delete');
+        Route::get('delete/{id}',[SliderAdminController::class,'delete'])->name('admin.slider.delete')->middleware('can:delete_slider');
     });
 
     Route::prefix('setting')->group(function(){
-        Route::get('/',[AdminSettingController::class,'index'])->name('admin.setting.index');
+        Route::get('/',[AdminSettingController::class,'index'])->name('admin.setting.index')->middleware('can:list_setting');
         
-        Route::get('add',[AdminSettingController::class,'create'])->name('admin.setting.add');
+        Route::get('add',[AdminSettingController::class,'create'])->name('admin.setting.add')->middleware('can:add_setting');
         Route::post('store',[AdminSettingController::class,'store'])->name('admin.setting.store');
 
-        Route::get('edit/{id}',[AdminSettingController::class,'edit'])->name('admin.setting.edit');
+        Route::get('edit/{id}',[AdminSettingController::class,'edit'])->name('admin.setting.edit')->middleware('can:edit_setting');
         Route::post('update/{id}',[AdminSettingController::class,'update'])->name('admin.setting.update');
 
-        Route::get('delete/{id}',[AdminSettingController::class,'delete'])->name('admin.setting.delete');
+        Route::get('delete/{id}',[AdminSettingController::class,'delete'])->name('admin.setting.delete')->middleware('can:delete_setting');
     });
 
     Route::prefix('users')->group(function(){
-        Route::get('/',[AdminUserController::class,'index'])->name('admin.user.index');
+        Route::get('/',[AdminUserController::class,'index'])->name('admin.user.index')->middleware('can:list_user');
         
-        Route::get('add',[AdminUserController::class,'create'])->name('admin.user.add');
+        Route::get('add',[AdminUserController::class,'create'])->name('admin.user.add')->middleware('can:add_user');
         Route::post('store',[AdminUserController::class,'store'])->name('admin.user.store');
 
-        Route::get('edit/{id}',[AdminUserController::class,'edit'])->name('admin.user.edit');
+        Route::get('edit/{id}',[AdminUserController::class,'edit'])->name('admin.user.edit')->middleware('can:edit_user');
         Route::post('update/{id}',[AdminUserController::class,'update'])->name('admin.user.update');
 
-        Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.user.delete');
+        Route::get('delete/{id}',[AdminUserController::class,'delete'])->name('admin.user.delete')->middleware('can:delete_user');
     });
     Route::prefix('role')->group(function(){
-        Route::get('/',[AdminRoleController::class,'index'])->name('admin.role.index');
-        Route::get('add',[AdminRoleController::class,'create'])->name('admin.role.add');
+        Route::get('/',[AdminRoleController::class,'index'])->name('admin.role.index')->middleware('can:list_role');
+        Route::get('add',[AdminRoleController::class,'create'])->name('admin.role.add')->middleware('can:add_role');
         Route::post('store',[AdminRoleController::class,'store'])->name('admin.role.store');
 
-        Route::get('edit/{id}',[AdminRoleController::class,'edit'])->name('admin.role.edit');
+        Route::get('edit/{id}',[AdminRoleController::class,'edit'])->name('admin.role.edit')->middleware('can:edit_role');
         Route::post('update/{id}',[AdminRoleController::class,'update'])->name('admin.role.update');
 
-        Route::get('delete/{id}',[AdminRoleController::class,'delete'])->name('admin.role.delete');
+        Route::get('delete/{id}',[AdminRoleController::class,'delete'])->name('admin.role.delete')->middleware('can:delete_role');
     });
     Route::prefix('permission')->group(function(){
         // Route::get('/',[AdminRoleController::class,'index'])->name('admin.permission.index');
