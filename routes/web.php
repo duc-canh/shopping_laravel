@@ -2,6 +2,7 @@
 
 use App\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
@@ -23,6 +24,10 @@ use App\Http\Controllers\AdminPermissionController;
 |
 */
 
+// trang web 
+Route::get('', [WebController::class,'index'])->name('web.index');
+
+//admin
 Route::get('admin', [AdminController::class,'loginAdmin']);
 Route::post('admin', [AdminController::class,'postLoginAdmin'])->name('admin.postLogin');
 
